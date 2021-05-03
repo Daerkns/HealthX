@@ -1,3 +1,4 @@
+/*This part was done by Souvik*/
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
