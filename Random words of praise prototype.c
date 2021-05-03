@@ -26,7 +26,7 @@ int main()
         printf("Small things add up. Good job!\n");
         }
     else if (praise == 6){
-        printf("Well done!");
+        printf("Well done!\n");
         }
     else if (praise == 7){
         printf("That's a healthy decision!\n");
