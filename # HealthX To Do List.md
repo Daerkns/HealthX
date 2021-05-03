@@ -6,4 +6,4 @@
 4. Create a simple Algorithm/flowchart to illustrate the processes of the program, for a clear understanding of how it works. This will divide the Source code, and 
         help us work in segments.  - DONE
 5. Learn to make an executable(.exe) file
-6. Learn how to select a random thing from a list 
+6. Learn how to select a random thing from a list - DONE
