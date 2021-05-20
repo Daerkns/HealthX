@@ -1,37 +1,57 @@
 #include <stdio.h>
-#include <math.h>
-#include <time.h>
 #include <stdlib.h>
+#include <time.h>
+
+int minute = 0, second = 0, flag = 0;
+char choice;
+
+
+void delay(int miliseconds)
+{
+    clock_t timeDelay = miliseconds + clock();
+    while(timeDelay > clock());
+}
+
+
+int counter()
+{
+    while(flag == 0)
+    {
+        if(second > 59)
+        {
+            second = 0;
+            ++minute;
+        }
+        alarm();
+        delay(1000);
+        ++second;
+        if(minute == 30)
+            printf("Did you do the activity? Y/N");
+            scanf("%c",choice);
+            if(choice == 'Y' || 'y')
+                praise();
+                minute = 0;
+                second = 0;
+            else if(choice == 'N' || 'n')
+                nexttime();
+                minute = 0;
+                second = 0;
+    }
+}
+
+
+int alarm()
+{
+    system("cls");
+    printf("*******************************************\n");
+    printf("                    %d:%d                  \n", minute, second);
+    printf("*******************************************\n");
+
+}
+
 
 int main()
 {
-    time_t t;
-    srand((unsigned) time(&t));
-    int blnt;
-    blnt = (rand()%8+1);
-    if (blnt == 1){
-        printf("Better luck next time!\n");
-        }
-    else if (blnt == 2){
-        printf("Awww, too bad.\n");
-        }
-    else if (blnt == 3){
-        printf("Hopefully, you'll do it next time!\n");
-        }
-    else if (blnt == 4){
-        printf("There's always another time.:3 \n");
-        }
-    else if (blnt == 5){
-        printf("No problem, you can do it later.\n");
-        }
-    else if (blnt == 6){
-        printf("It's okay to skip once in a while.\n");
-        }
-    else if (blnt == 7){
-        printf("Don't worry, give it a shot next time.\n");
-        }
-    else if (blnt == 8){
-        printf("Try again later.\n");
-        }
-return 0;
+    counter();
+    return 0;
 }
