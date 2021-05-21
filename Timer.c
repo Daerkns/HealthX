@@ -4,7 +4,9 @@
 #include <time.h>
 #include <math.h>
 #include <direct.h>
+char choice;
 int minute = 0, second = 0, flag = 0;
+
 void delay(int miliseconds)
 {
     clock_t timeDelay = miliseconds + clock();
@@ -91,7 +93,6 @@ int nexttime()
 
 int stretch()
 {
-    char choice;
     while(flag == 0)
     {
         if(second > 59)
@@ -115,13 +116,13 @@ int stretch()
                 nexttime();
                 minute = 0;
                 second = 0;
-                }
+                }          /*can add error message in another else if, if some other character is entered*/
+            stretch();
     }
 }
 
 int water()
 {
-    char choice;
     while(flag == 0)
     {
         if(second > 59)
@@ -146,12 +147,12 @@ int water()
                 minute = 0;
                 second = 0;
                 }
+            water();
     }
 }
 
 int sunlight()
 {
-    char choice;
     while(flag == 0)
     {
         if(second > 59)
@@ -176,6 +177,7 @@ int sunlight()
                 minute = 0;
                 second = 0;
                 }
+            sunlight();
     }
 }
 
