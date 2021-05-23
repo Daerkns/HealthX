@@ -1,11 +1,21 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <windows.h>
 #include <time.h>
 #include <math.h>
 #include <direct.h>
+
 char choice;
 int minute = 0, second = 0, flag = 0;
+
+int alarm()
+{
+    system("cls");
+    printf("*******************************************\n");
+    printf("                    %d:%d                  \n", minute, second);
+    printf("*******************************************\n");
+}
 
 void delay(int miliseconds)
 {
@@ -13,10 +23,102 @@ void delay(int miliseconds)
     while(timeDelay > clock());
 }
 
+int displaypoints()
+{
+    int points;
+    FILE * hp = fopen("points.txt", "r");
+    fscanf(hp, "%d", &points);
+    fclose(hp);
+    return points;
+}
+
+int healthpoints1()
+{
+    int points;
+    FILE * hp = fopen("points.txt", "r");
+    if (!hp){
+        hp = fopen("points.txt","w");
+        if (!hp) return -1;
+        fprintf(hp, "%d", 1);
+        fclose(hp);
+        return 1;
+    }
+    fscanf(hp, "%d", &points);
+    points++;
+
+    fclose(hp);
+    hp = fopen("points.txt", "w");
+    fprintf(hp,"%d",points);
+    fclose(hp);
+    return points;
+}
+
+int healthpoints3()
+{
+    int points;
+    FILE * hp = fopen("points.txt", "r");
+    if (!hp){
+        hp = fopen("points.txt","w");
+        if (!hp) return -1;
+        fprintf(hp, "%d", 1);
+        fclose(hp);
+        return 1;
+    }
+    fscanf(hp, "%d", &points);
+    points = points + 3;
+
+    fclose(hp);
+    hp = fopen("points.txt", "w");
+    fprintf(hp,"%d",points);
+    fclose(hp);
+    return points;
+}
+
+int healthpoints5()
+{
+    int points;
+    FILE * hp = fopen("points.txt", "r");
+    if (!hp){
+        hp = fopen("points.txt","w");
+        if (!hp) return -1;
+        fprintf(hp, "%d", 1);
+        fclose(hp);
+        return 1;
+    }
+    fscanf(hp, "%d", &points);
+    points = points + 5;
+
+    fclose(hp);
+    hp = fopen("points.txt", "w");
+    fprintf(hp,"%d",points);
+    fclose(hp);
+    return points;
+}
+
+int healthpointsEXP()
+{
+    int points;
+    FILE * hp = fopen("points.txt", "r");
+    if (!hp){
+        hp = fopen("points.txt","w");
+        if (!hp) return -1;
+        fprintf(hp, "%d", 1);
+        fclose(hp);
+        return 1;
+    }
+    fscanf(hp, "%d", &points);
+    points = points + 10;
+
+    fclose(hp);
+    hp = fopen("points.txt", "w");
+    fprintf(hp,"%d",points);
+    fclose(hp);
+    return points;
+}
+
 void playsound()
 {
     Beep(550, 600);
-    return 0;
 }
 
 void praise()
@@ -55,7 +157,6 @@ void praise()
     else if (praise == 10){
         printf("Wonderful!\n");
         }
-    return 0;
 }
 
 int nexttime()
@@ -88,7 +189,6 @@ int nexttime()
     else if (luck == 8){
         printf("Try again later.\n");
         }
-    return 0;
 }
 
 int stretch()
@@ -103,21 +203,29 @@ int stretch()
         alarm();
         delay(1000);
         ++second;
-        if(minute == 60)
+        if(minute == 60 && second == 1){
             playsound();
-            printf("Did you take a break and stretch? Y/N");
-            scanf("%c",choice);
-            if(choice == 'Y' || 'y'){
+            printf("It has been an hour. You should get up and stretch, so go on ahead and we'll wait. Did you stretch? y/n\n");
+            scanf("%s", &choice);
+            if(choice == 'y'){
+                minute = 0;
+                second = 0;
                 praise();
-                minute = 0;
-                second = 0;
+                healthpoints3();
+                printf("Your current Health Points = %d",displaypoints());
+                sleep(3);
                 }
-            else if(choice == 'N' || 'n'){
-                nexttime();
+            else if(choice == 'n'){
                 minute = 0;
                 second = 0;
-                }          /*can add error message in another else if, if some other character is entered*/
-            stretch();
+                nexttime();
+                sleep(3);
+                }
+            else{
+                printf("Error, invalid input. Exiting program");
+                exit(0);
+            }
+        }
     }
 }
 
@@ -133,21 +241,29 @@ int water()
         alarm();
         delay(1000);
         ++second;
-        if(minute == 30)
+        if(minute == 45 && second == 1){
             playsound();
-            printf("Did you drink water? Y/N");
-            scanf("%c",choice);
-            if(choice == 'Y' || 'y'){
+            printf("It has been 45 minutes. You should drink some water, we'll wait. Did you drink water?? y/n\n");
+            scanf("%s", &choice);
+            if(choice == 'y'){
+                minute = 0;
+                second = 0;
                 praise();
+                healthpoints1();
+                printf("Your current Health Points = %d",displaypoints());
+                sleep(3);
+                }
+            else if(choice == 'n'){
                 minute = 0;
                 second = 0;
-                }
-            else if(choice == 'N' || 'n'){
                 nexttime();
-                minute = 0;
-                second = 0;
+                sleep(3);
                 }
-            water();
+            else{
+                printf("Error, invalid input. Exiting program");
+                exit(0);
+            }
+        }
     }
 }
 
@@ -163,27 +279,36 @@ int sunlight()
         alarm();
         delay(1000);
         ++second;
-        if(minute == 120)
+        if(minute == 120 && second == 1){
             playsound();
-            printf("Did you go out and absorb some sunlight? Y/N");
-            scanf("%c",choice);
-            if(choice == 'Y' || 'y'){
+            printf("It has been 2 hours since the start of the application. You should go out in the sun once a day, so go an ahead and we'll wait. Did you go out in the sun? y/n\n");
+            scanf("%s", &choice);
+            if(choice == 'y'){
+                minute = 0;
+                second = 0;
                 praise();
+                healthpoints5();
+                printf("Your current Health Points = %d",displaypoints());
+                sleep(3);
+                exit(0);
+                }
+            else if(choice == 'n'){
                 minute = 0;
                 second = 0;
-                }
-            else if(choice == 'N' || 'n'){
                 nexttime();
-                minute = 0;
-                second = 0;
+                sleep(3);
+                exit(0);
                 }
-            sunlight();
+            else{
+                printf("Error, invalid input. Exiting program");
+                exit(0);
+            }
+        }
     }
 }
 
 int test()
 {
-    char choice;
     while(flag == 0)
     {
         if(second > 59)
@@ -194,38 +319,42 @@ int test()
         alarm();
         delay(1000);
         ++second;
-        if(minute == 1)
+        if(second == 11){
             playsound();
-            printf("What is your test choice? Y/N");
-            scanf("%c",choice);
-            if(choice == 'Y' || 'y'){
+            printf("Did you do the activity? y/n\n");
+            scanf("%s", &choice);
+            if(choice == 'y'){
+                minute = 0;
+                second = 0;
                 praise();
+                healthpointsEXP();
+                printf("Your Current health points = %d",displaypoints());
+                sleep(3);
+                }
+            else if(choice == 'n'){
                 minute = 0;
                 second = 0;
-                }
-            else if(choice == 'N' || 'n'){
                 nexttime();
-                minute = 0;
-                second = 0;
+                sleep(3);
                 }
-            test();
+            else{
+                printf("Error, invalid input. Exiting program");
+                exit(0);
+            }
+        }
     }
-}
-
-int alarm()
-{
-    system("cls");
-    printf("*******************************************\n");
-    printf("                    %d:%d                  \n", minute, second);
-    printf("*******************************************\n");
 }
 
 int main()
 {   
     int num;
+    printf("********************************************************************************************\n");
+    printf("Welcome to HealthX - a prototype project that aims to remind you of doing healthy activities.\n");
+    printf("********************************************************************************************\n\n");
+    printf("Your current health points are: %d\n\n",displaypoints());
     printf("What activity reminder do you want to set?\n1.Stretch break\n2.Drinking water\n3.Sunlight exposure\n4.Test/experimental?\n");
-    scanf("%d",num);
-    switch (num){
+    scanf("%d", &num);
+    switch(num){
     case 1:
         stretch();
         break;
@@ -238,6 +367,8 @@ int main()
     case 4:
         test();
         break;
+    default:
+        printf("Error, valid input. Please enter any one of the following - '1' '2' '3' or '4'");
     }
     return 0;
 }
