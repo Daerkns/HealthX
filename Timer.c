@@ -17,7 +17,7 @@ int alarm()
     printf("*******************************************\n");
 }
 
-void delay(int miliseconds)
+void delay(int miliseconds) /*search for info*/
 {
     clock_t timeDelay = miliseconds + clock();
     while(timeDelay > clock());
@@ -60,7 +60,7 @@ int healthpoints3()
     if (!hp){
         hp = fopen("points.txt","w");
         if (!hp) return -1;
-        fprintf(hp, "%d", 1);
+        fprintf(hp, "%d", 3);
         fclose(hp);
         return 1;
     }
@@ -81,7 +81,7 @@ int healthpoints5()
     if (!hp){
         hp = fopen("points.txt","w");
         if (!hp) return -1;
-        fprintf(hp, "%d", 1);
+        fprintf(hp, "%d", 5);
         fclose(hp);
         return 1;
     }
@@ -99,17 +99,17 @@ int healthpointsEXP()
 {
     int points;
     FILE * hp = fopen("points.txt", "r");
-    if (!hp){
+    if (!hp){ /*Initializing the file for the first time, with value associated with the activity*/
         hp = fopen("points.txt","w");
         if (!hp) return -1;
-        fprintf(hp, "%d", 1);
+        fprintf(hp, "%d", 10);
         fclose(hp);
         return 1;
     }
     fscanf(hp, "%d", &points);
     points = points + 10;
-
     fclose(hp);
+    
     hp = fopen("points.txt", "w");
     fprintf(hp,"%d",points);
     fclose(hp);
@@ -297,7 +297,6 @@ int sunlight()
                 second = 0;
                 nexttime();
                 sleep(3);
-                exit(0);
                 }
             else{
                 printf("Error, invalid input. Exiting program");
@@ -352,7 +351,7 @@ int main()
     printf("Welcome to HealthX - a prototype project that aims to remind you of doing healthy activities.\n");
     printf("********************************************************************************************\n\n");
     printf("Your current health points are: %d\n\n",displaypoints());
-    printf("What activity reminder do you want to set?\n1.Stretch break\n2.Drinking water\n3.Sunlight exposure\n4.Test/experimental?\n");
+    printf("What activity reminder do you want to set?\n1.Stretch break\n2.Drinking water\n3.Sunlight exposure\n4.Test/experimental\n");
     scanf("%d", &num);
     switch(num){
     case 1:
@@ -368,7 +367,7 @@ int main()
         test();
         break;
     default:
-        printf("Error, valid input. Please enter any one of the following - '1' '2' '3' or '4'");
+        printf("Error, invalid input. Please enter any one of the following - '1' '2' '3' or '4'");
     }
     return 0;
 }
