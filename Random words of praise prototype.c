@@ -6,8 +6,7 @@
 
 int main()
 {
-    time_t t;
-    srand((unsigned) time(&t));
+    srand(time(0));
     int praise;
     praise = (rand()%10+1);
     if (praise == 1){

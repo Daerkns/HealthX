@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <time.h>
-#include <math.h>
-#include <direct.h>
+
+//Nasiha's contribution - Part 1,2,3,4,5
+//Souvik's contribution - part 6,7,8,9,10
 
 char choice;
 int minute = 0, second = 0, flag = 0;
@@ -308,10 +309,10 @@ int test() //part 4
             ++minute;
         }// end of part 4
         displaytimer(); //part 5
-        sleep(1); //part 6
+        sleep(1); //unistd.h  //part 6
         ++second;
         if(second == 5){
-            playsound();
+            playsound(); //windows.h
             printf("Did you do the activity? y/n\n");
             scanf("%s", &choice); //part 7
             if(choice == 'y'){
@@ -330,14 +331,14 @@ int test() //part 4
                 }
                 else{ //part 7
                     printf("Error, invalid input. Exiting program");
-                    exit(0); //part 10
+                    exit(0); //stdlib.h //part 10
             }
         }
     }
 }
 
 int main() //part 1
-{   
+{
     int num;
     printf("********************************************************************************************\n");
     printf("Welcome to HealthX - a prototype project that aims to remind you of doing healthy activities.\n");
