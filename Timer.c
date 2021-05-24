@@ -9,7 +9,7 @@
 char choice;
 int minute = 0, second = 0, flag = 0;
 
-int alarm()
+int displaytimer()
 {
     system("cls");
     printf("*******************************************\n");
@@ -17,13 +17,7 @@ int alarm()
     printf("*******************************************\n");
 }
 
-void delay(int miliseconds) /*search for info*/
-{
-    clock_t timeDelay = miliseconds + clock();
-    while(timeDelay > clock());
-}
-
-int displaypoints()
+int displaypoints() //part 2
 {
     int points;
     FILE * hp = fopen("points.txt", "r");
@@ -123,8 +117,7 @@ void playsound()
 
 void praise()
 {
-    time_t t;
-    srand((unsigned) time(&t));
+    srand(time(0));
     int praise;
     praise = (rand()%10+1);
     if (praise == 1){
@@ -161,8 +154,7 @@ void praise()
 
 int nexttime()
 {
-    time_t t;
-    srand((unsigned) time(&t));
+    srand(time(0));
     int luck;
     luck = (rand()%8+1);
     if (luck == 1){
@@ -200,8 +192,8 @@ int stretch()
             second = 0;
             ++minute;
         }
-        alarm();
-        delay(1000);
+        displaytimer();
+        sleep(1);
         ++second;
         if(minute == 60 && second == 1){
             playsound();
@@ -238,8 +230,8 @@ int water()
             second = 0;
             ++minute;
         }
-        alarm();
-        delay(1000);
+        displaytimer();
+        sleep(1);
         ++second;
         if(minute == 45 && second == 1){
             playsound();
@@ -276,8 +268,8 @@ int sunlight()
             second = 0;
             ++minute;
         }
-        alarm();
-        delay(1000);
+        displaytimer();
+        sleep(1);
         ++second;
         if(minute == 120 && second == 1){
             playsound();
@@ -306,7 +298,7 @@ int sunlight()
     }
 }
 
-int test()
+int test() //part 4
 {
     while(flag == 0)
     {
@@ -314,46 +306,46 @@ int test()
         {
             second = 0;
             ++minute;
-        }
-        alarm();
-        delay(1000);
+        }// end of part 4
+        displaytimer(); //part 5
+        sleep(1); //part 6
         ++second;
-        if(second == 11){
+        if(second == 5){
             playsound();
             printf("Did you do the activity? y/n\n");
-            scanf("%s", &choice);
+            scanf("%s", &choice); //part 7
             if(choice == 'y'){
                 minute = 0;
                 second = 0;
-                praise();
-                healthpointsEXP();
+                praise(); //part 8
+                healthpointsEXP(); //part 9
                 printf("Your Current health points = %d",displaypoints());
-                sleep(3);
+                sleep(3); //part 10
                 }
-            else if(choice == 'n'){
+            else if(choice == 'n'){ //part 7
                 minute = 0;
                 second = 0;
-                nexttime();
-                sleep(3);
+                nexttime(); //part 8
+                sleep(3); //part 10
                 }
-            else{
-                printf("Error, invalid input. Exiting program");
-                exit(0);
+                else{ //part 7
+                    printf("Error, invalid input. Exiting program");
+                    exit(0); //part 10
             }
         }
     }
 }
 
-int main()
+int main() //part 1
 {   
     int num;
     printf("********************************************************************************************\n");
     printf("Welcome to HealthX - a prototype project that aims to remind you of doing healthy activities.\n");
     printf("********************************************************************************************\n\n");
-    printf("Your current health points are: %d\n\n",displaypoints());
+    printf("Your current health points are: %d\n\n",displaypoints());//part 2
     printf("What activity reminder do you want to set?\n1.Stretch break\n2.Drinking water\n3.Sunlight exposure\n4.Test/experimental\n");
     scanf("%d", &num);
-    switch(num){
+    switch(num){ //part 3
     case 1:
         stretch();
         break;
@@ -368,6 +360,7 @@ int main()
         break;
     default:
         printf("Error, invalid input. Please enter any one of the following - '1' '2' '3' or '4'");
+        break;
     }
     return 0;
 }
