@@ -4,8 +4,8 @@
 #include <windows.h>
 #include <time.h>
 
-//Nasiha's contribution - Part 1,2,3,4,5
-//Souvik's contribution - part 6,7,8,9,10
+//Nasiha's parts - Part 1,2,3,4,5
+//Souvik's parts - part 6,7,8,9,10
 
 char choice;
 int minute = 0, second = 0, flag = 0;
@@ -94,7 +94,7 @@ int healthpointsEXP()
 {
     int points;
     FILE * hp = fopen("points.txt", "r");
-    if (!hp){ /*Initializing the file for the first time, with value associated with the activity*/
+    if (!hp){
         hp = fopen("points.txt","w");
         if (!hp) return -1;
         fprintf(hp, "%d", 10);
@@ -108,7 +108,6 @@ int healthpointsEXP()
     hp = fopen("points.txt", "w");
     fprintf(hp,"%d",points);
     fclose(hp);
-    return points;
 }
 
 void playsound()
@@ -321,13 +320,13 @@ int test() //part 4
                 praise(); //part 8
                 healthpointsEXP(); //part 9
                 printf("Your Current health points = %d",displaypoints());
-                sleep(3); //part 10
+                sleep(5); //part 10
                 }
             else if(choice == 'n'){ //part 7
                 minute = 0;
                 second = 0;
                 nexttime(); //part 8
-                sleep(3); //part 10
+                sleep(5); //part 10
                 }
                 else{ //part 7
                     printf("Error, invalid input. Exiting program");
