@@ -16,6 +16,8 @@ Current Idea Roadmap  -
 
 6. Additional features - Drinking water, sunlight exposure, dietary fiber. Reminder times to be decided.
 
+7. Integrating the questions from our mental health project and including it in HealthX where the program will keep track of the user's mental health. For example, the user will be asked to fill the questionnaire once a week and if they keep getting scores where they are advised to seek help from a therapist for three consecutive weeks then the user will be given a proper reminder of it.
+
 Aesthetic Roadmap - 
 
 1.  The Golden Ratio - Research on it and other similar ideas of making things look attractive.
